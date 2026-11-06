@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { mergeWishes, parseWishes, serializeWishes, validUrl } from '../src/wishes.js';
+import { mergeWishes, mutateStoredWishes, parseWishes, serializeWishes, validUrl } from '../src/wishes.js';
 
 const item = { id: 'test-wish', title: 'a book', category: 'books', note: '', price: '', url: 'https://example.com/book', image: '', claimed: false, favorite: false };
 
@@ -51,4 +51,26 @@ test('all published wishes are valid and local images exist', async () => {
     const bytes = await readFile(new URL(`../public${wish.image}`, import.meta.url));
     assert.ok(bytes.length > 100);
   }
+});
+
+test('an edit from a stale tab preserves additions made in another tab', () => {
+  let saved = serializeWishes([item]);
+  const storage = { getItem: () => saved, setItem: (_key, value) => { saved = value; } };
+  const staleTab = [item];
+  const newWish = { ...item, id: 'new-wish', title: 'another book' };
+  mutateStoredWishes(storage, [item], current => [...current, newWish]);
+  mutateStoredWishes(storage, staleTab, current => current.map(wish => wish.id === item.id ? { ...wish, favorite: true } : wish));
+  const final = parseWishes(saved);
+  assert.equal(final.length, 2);
+  assert.equal(final[0].favorite, true);
+  assert.equal(final[1].id, 'new-wish');
+});
+
+test('an unreadable saved collection is not overwritten by an edit', () => {
+  let saved = '{broken';
+  const storage = { getItem: () => saved, setItem: (_key, value) => { saved = value; } };
+  const result = mutateStoredWishes(storage, [item], current => current.map(wish => ({ ...wish, claimed: true })));
+  assert.equal(saved, '{broken');
+  assert.equal(result.wishes[0].claimed, true);
+  assert.match(result.error, /export a copy/);
 });

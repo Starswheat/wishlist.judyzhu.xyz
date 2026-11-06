@@ -62,3 +62,24 @@ export function mergeWishes(current, incoming) {
   return [...next.values()];
 }
 export function serializeWishes(wishes) { return JSON.stringify({ version: 1, wishes }, null, 2); }
+
+// Rebase each edit on storage, rather than a tab's possibly stale React state.
+// A broken/unavailable store never replaces the user's recoverable stored data.
+export function mutateStoredWishes(storage, fallback, update) {
+  let current = fallback;
+  let readable = true;
+  let error = '';
+  try {
+    const saved = storage.getItem(STORAGE_KEY);
+    if (saved !== null) current = parseWishes(saved);
+  } catch {
+    readable = false;
+    error = 'your saved collection could not be updated. export a copy to keep these changes.';
+  }
+  const wishes = update(current);
+  if (readable) {
+    try { storage.setItem(STORAGE_KEY, serializeWishes(wishes)); }
+    catch { error = 'your browser could not save these changes. export a copy to keep them.'; }
+  }
+  return { wishes, error };
+}

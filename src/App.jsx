@@ -1,9 +1,10 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import { ArrowLeft, ArrowUpRight, Check, DownloadSimple, Heart, MagnifyingGlass, PencilSimple, Plus, Trash, UploadSimple, X } from '@phosphor-icons/react';
 import seedWishes from './content/wishes.json';
-import { CATEGORIES, MAX_WISHES, STORAGE_KEY, mergeWishes, normalizeWish, parseWishes, serializeWishes, validateWish } from './wishes.js';
+import { CATEGORIES, MAX_WISHES, STORAGE_KEY, mergeWishes, mutateStoredWishes, normalizeWish, parseWishes, serializeWishes, validateWish } from './wishes.js';
 
 const blank = { title: '', category: 'books', note: '', price: '', url: '', image: '' };
+const browserStorage = { getItem: key => localStorage.getItem(key), setItem: (key, value) => localStorage.setItem(key, value) };
 function readInitial() {
   try { return { wishes: parseWishes(localStorage.getItem(STORAGE_KEY) ?? JSON.stringify(seedWishes)), error: '' }; }
   catch { return { wishes: parseWishes(JSON.stringify(seedWishes)), error: 'your saved collection could not be opened. import a backup to restore it.' }; }
@@ -86,20 +87,37 @@ function ImportDialog({ current, onImport, onClose }) {
 export function App() {
   const [initial] = useState(readInitial); const [wishes, setWishes] = useState(initial.wishes); const [storageError, setStorageError] = useState(initial.error);
   const [category, setCategory] = useState('all'); const [query, setQuery] = useState(''); const [status, setStatus] = useState('all');
-  const [modal, setModal] = useState(null); const [toast, setToast] = useState(null); const [hasChanged, setHasChanged] = useState(false); const timer = useRef(null);
-  useEffect(() => { if (!hasChanged) return; try { localStorage.setItem(STORAGE_KEY, serializeWishes(wishes)); setStorageError(''); } catch { setStorageError('your browser could not save these changes. export a copy to keep them.'); } }, [wishes, hasChanged]);
+  const [modal, setModal] = useState(null); const [toast, setToast] = useState(null); const timer = useRef(null);
+  useEffect(() => {
+    function sync(event) {
+      if (event.key !== STORAGE_KEY && event.key !== null) return;
+      try { setWishes(parseWishes(event.newValue ?? JSON.stringify(seedWishes))); setStorageError(''); }
+      catch { setStorageError('another tab saved an unreadable collection. export this copy before continuing.'); }
+    }
+    window.addEventListener('storage', sync);
+    return () => window.removeEventListener('storage', sync);
+  }, []);
   useEffect(() => () => clearTimeout(timer.current), []);
   function notify(message, undo) { clearTimeout(timer.current); setToast({ message, undo }); if (!undo) timer.current = setTimeout(() => setToast(null), 4500); }
-  function change(next) { setHasChanged(true); setWishes(next); }
+  function change(update) {
+    try {
+      const next = mutateStoredWishes(browserStorage, wishes, update);
+      setWishes(next.wishes); setStorageError(next.error); return true;
+    } catch (error) { notify(error.message || 'this change could not be saved.'); return false; }
+  }
   function save(wish) {
     const existing = wishes.some(item => item.id === wish.id);
-    if (!existing && wishes.length >= MAX_WISHES) { notify(`your collection can hold up to ${MAX_WISHES} wishes.`); return; }
-    change(existing ? wishes.map(item => item.id === wish.id ? wish : item) : [wish, ...wishes]); setModal(null); notify(existing ? 'wish updated.' : 'a little wish, saved.');
+    const saved = change(current => {
+      const found = current.some(item => item.id === wish.id);
+      if (!found && current.length >= MAX_WISHES) throw new Error(`your collection can hold up to ${MAX_WISHES} wishes.`);
+      return found ? current.map(item => item.id === wish.id ? wish : item) : [wish, ...current];
+    });
+    if (saved) { setModal(null); notify(existing ? 'wish updated.' : 'a little wish, saved.'); }
   }
-  function toggle(id, key) { change(wishes.map(wish => wish.id === id ? { ...wish, [key]: !wish[key] } : wish)); }
+  function toggle(id, key) { change(current => current.map(wish => wish.id === id ? { ...wish, [key]: !wish[key] } : wish)); }
   function remove(wish) {
-    const index = wishes.findIndex(item => item.id === wish.id); change(wishes.filter(item => item.id !== wish.id)); setModal(null);
-    notify('wish removed.', () => { setHasChanged(true); setWishes(current => { if (current.some(item => item.id === wish.id)) return current; const next = [...current]; next.splice(Math.min(index, next.length), 0, wish); return next; }); notify('wish restored.'); });
+    const index = wishes.findIndex(item => item.id === wish.id); change(current => current.filter(item => item.id !== wish.id)); setModal(null);
+    notify('wish removed.', () => { change(current => { if (current.some(item => item.id === wish.id)) return current; const next = [...current]; next.splice(Math.min(index, next.length), 0, wish); return next; }); notify('wish restored.'); });
   }
   function exportFile() {
     const url = URL.createObjectURL(new Blob([serializeWishes(wishes)], { type: 'application/json' })); const anchor = document.createElement('a'); anchor.href = url; anchor.download = 'judys-wishlist.json'; anchor.click(); setTimeout(() => URL.revokeObjectURL(url), 1000); notify('your wishlist export is ready.');
@@ -127,7 +145,7 @@ export function App() {
     </main><footer className="site-footer"><p>made by <a href="https://judyzhu.xyz">judy xīngyǐng</a></p><p>claims are just for fun and stay in this browser.</p></footer></div>
     {modal?.type === 'add' && <WishForm onSave={save} onClose={() => setModal(null)} />}{modal?.type === 'edit' && <WishForm wish={modal.wish} onSave={save} onClose={() => setModal(null)} />}
     {active && <WishDetail wish={active} onClose={() => setModal(null)} onEdit={wish => setModal({ type: 'edit', wish })} onToggle={toggle} onDelete={remove} />}
-    {modal?.type === 'import' && <ImportDialog current={wishes} onClose={() => setModal(null)} onImport={incoming => { change(mergeWishes(wishes, incoming)); setModal(null); notify(`${incoming.length} ${incoming.length === 1 ? 'wish' : 'wishes'} imported.`); }} />}
+    {modal?.type === 'import' && <ImportDialog current={wishes} onClose={() => setModal(null)} onImport={incoming => { if (change(current => mergeWishes(current, incoming))) { setModal(null); notify(`${incoming.length} ${incoming.length === 1 ? 'wish' : 'wishes'} imported.`); } }} />}
     <div className="toast-region" aria-live="polite" aria-atomic="true">{toast && <div className="toast"><span>{toast.message}</span>{toast.undo && <button onClick={toast.undo}>undo</button>}<button className="toast-close" aria-label="dismiss notification" onClick={() => setToast(null)}><X size={15} /></button></div>}</div>
   </>;
 }
