@@ -29,7 +29,8 @@ function WishForm({ wish, onSave, onClose }) {
   function submit(event) {
     event.preventDefault(); const nextErrors = validateWish(fields); setErrors(nextErrors);
     if (Object.keys(nextErrors).length) { event.currentTarget.querySelector(`[name="${Object.keys(nextErrors)[0]}"]`)?.focus(); return; }
-    onSave(normalizeWish({ ...fields, id: wish?.id ?? crypto.randomUUID(), createdAt: wish?.createdAt ?? new Date().toISOString() }));
+    const links = (fields.links || []).filter(link => link.url !== wish?.url);
+    onSave(normalizeWish({ ...fields, links, id: wish?.id ?? crypto.randomUUID(), createdAt: wish?.createdAt ?? new Date().toISOString() }));
   }
   const error = name => errors[name] && <span className="field-error" id={`${name}-error`}>{errors[name]}</span>;
   return <Modal title={wish ? 'edit wish' : 'add a little wish'} onClose={onClose}><form onSubmit={submit} noValidate>
