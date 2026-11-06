@@ -110,7 +110,7 @@ export function App() {
     const saved = change(current => {
       const found = current.some(item => item.id === wish.id);
       if (!found && current.length >= MAX_WISHES) throw new Error(`your collection can hold up to ${MAX_WISHES} wishes.`);
-      return found ? current.map(item => item.id === wish.id ? wish : item) : [wish, ...current];
+      return found ? current.map(item => item.id === wish.id ? { ...wish, favorite: item.favorite, claimed: item.claimed } : item) : [wish, ...current];
     });
     if (saved) { setModal(null); notify(existing ? 'wish updated.' : 'a little wish, saved.'); }
   }
