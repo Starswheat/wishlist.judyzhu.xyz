@@ -1,0 +1,330 @@
+[
+  {
+    "id": "akari-lamp",
+    "title": "isamu noguchi's lamp",
+    "category": "home",
+    "note": "an akari light sculpture. the image shows the 1a; the exact model is still open.",
+    "price": "",
+    "url": "https://shop.noguchi.org/collections/akari-table-lamps",
+    "image": "/gifts/akari-lamp.avif",
+    "links": [
+      {
+        "label": "visit shop",
+        "url": "https://shop.noguchi.org/collections/akari-table-lamps"
+      }
+    ],
+    "favorite": false,
+    "claimed": false,
+    "createdAt": "2026-11-06T00:00:00.000Z"
+  },
+  {
+    "id": "muji-beanbag",
+    "title": "muji beanbag",
+    "category": "home",
+    "note": "a body fit cushion for a quiet corner. the cushion and cover are sold separately.",
+    "price": "",
+    "url": "https://www.muji.us/collections/body-fit-cushion",
+    "image": "/gifts/muji-beanbag.jpg",
+    "links": [
+      {
+        "label": "visit shop",
+        "url": "https://www.muji.us/collections/body-fit-cushion"
+      }
+    ],
+    "favorite": false,
+    "claimed": false,
+    "createdAt": "2026-11-06T00:00:00.000Z"
+  },
+  {
+    "id": "made-in-pans",
+    "title": "made in pans",
+    "category": "home",
+    "note": "frying pans for everyday cooking. size and finish are still open.",
+    "price": "",
+    "url": "https://madeincookware.com/collections/frying-pans",
+    "image": "/gifts/made-in-pans.jpg",
+    "links": [
+      {
+        "label": "visit shop",
+        "url": "https://madeincookware.com/collections/frying-pans"
+      }
+    ],
+    "favorite": false,
+    "claimed": false,
+    "createdAt": "2026-11-06T00:00:00.000Z"
+  },
+  {
+    "id": "situated",
+    "title": "situated",
+    "category": "books",
+    "note": "a book about the influence of people and places.",
+    "price": "",
+    "url": "https://www.amazon.com/dp/1668005948/",
+    "image": "/gifts/situated.webp",
+    "links": [
+      {
+        "label": "visit shop",
+        "url": "https://www.amazon.com/dp/1668005948/"
+      }
+    ],
+    "favorite": false,
+    "claimed": false,
+    "createdAt": "2026-11-06T00:00:00.000Z"
+  },
+  {
+    "id": "how-buildings-learn",
+    "title": "how buildings learn",
+    "category": "books",
+    "note": "a book about how buildings change over time.",
+    "price": "",
+    "url": "https://www.amazon.com/dp/0140139966/",
+    "image": "/gifts/how-buildings-learn.webp",
+    "links": [
+      {
+        "label": "visit shop",
+        "url": "https://www.amazon.com/dp/0140139966/"
+      }
+    ],
+    "favorite": false,
+    "claimed": false,
+    "createdAt": "2026-11-06T00:00:00.000Z"
+  },
+  {
+    "id": "sleeping-beauties",
+    "title": "sleeping beauties",
+    "category": "books",
+    "note": "a book about good ideas that lie dormant.",
+    "price": "",
+    "url": "https://www.amazon.com/dp/0593655273/",
+    "image": "/gifts/sleeping-beauties.webp",
+    "links": [
+      {
+        "label": "visit shop",
+        "url": "https://www.amazon.com/dp/0593655273/"
+      }
+    ],
+    "favorite": false,
+    "claimed": false,
+    "createdAt": "2026-11-06T00:00:00.000Z"
+  },
+  {
+    "id": "flying-car",
+    "title": "where is my flying car?",
+    "category": "books",
+    "note": "a book about technology and an ambitious future.",
+    "price": "",
+    "url": "https://www.amazon.com/dp/1953953182/",
+    "image": "/gifts/flying-car.webp",
+    "links": [
+      {
+        "label": "visit shop",
+        "url": "https://www.amazon.com/dp/1953953182/"
+      }
+    ],
+    "favorite": false,
+    "claimed": false,
+    "createdAt": "2026-11-06T00:00:00.000Z"
+  },
+  {
+    "id": "arsicault",
+    "title": "arsicault bakery gift card",
+    "category": "experiences",
+    "note": "a gift card for pastries from arsicault bakery.",
+    "price": "",
+    "url": "https://arsicault-bakery.com/gift_cards/",
+    "image": "/gifts/arsicault.webp",
+    "links": [
+      {
+        "label": "visit shop",
+        "url": "https://arsicault-bakery.com/gift_cards/"
+      }
+    ],
+    "favorite": false,
+    "claimed": false,
+    "createdAt": "2026-11-06T00:00:00.000Z"
+  },
+  {
+    "id": "grid-systems",
+    "title": "grid systems in graphic design",
+    "category": "books",
+    "note": "a classic guide to organizing a page.",
+    "price": "",
+    "url": "https://www.amazon.com/dp/3721201450/",
+    "image": "/gifts/grid-systems.webp",
+    "links": [
+      {
+        "label": "visit shop",
+        "url": "https://www.amazon.com/dp/3721201450/"
+      }
+    ],
+    "favorite": false,
+    "claimed": false,
+    "createdAt": "2026-11-06T00:00:00.000Z"
+  },
+  {
+    "id": "anthropologie",
+    "title": "anthropologie gift card",
+    "category": "other",
+    "note": "a gift card for something lovely from anthropologie.",
+    "price": "",
+    "url": "https://www.anthropologie.com/gift-cards",
+    "image": "/gifts/anthropologie.webp",
+    "links": [
+      {
+        "label": "visit shop",
+        "url": "https://www.anthropologie.com/gift-cards"
+      }
+    ],
+    "favorite": false,
+    "claimed": false,
+    "createdAt": "2026-11-06T00:00:00.000Z"
+  },
+  {
+    "id": "hu-chocolate",
+    "title": "hu milk chocolate variety pack",
+    "category": "other",
+    "note": "a selection of milk chocolate bars from hu.",
+    "price": "",
+    "url": "https://www.amazon.com/dp/B0GH78XV9Q/",
+    "image": "/gifts/hu-chocolate.webp",
+    "links": [
+      {
+        "label": "visit shop",
+        "url": "https://www.amazon.com/dp/B0GH78XV9Q/"
+      }
+    ],
+    "favorite": false,
+    "claimed": false,
+    "createdAt": "2026-11-06T00:00:00.000Z"
+  },
+  {
+    "id": "kiehls",
+    "title": "kiehl's ultra facial cream",
+    "category": "other",
+    "note": "ultra facial cream from kiehl’s.",
+    "price": "",
+    "url": "https://www.amazon.com/dp/B00C6SV33M/",
+    "image": "/gifts/kiehls.webp",
+    "links": [
+      {
+        "label": "visit shop",
+        "url": "https://www.amazon.com/dp/B00C6SV33M/"
+      }
+    ],
+    "favorite": false,
+    "claimed": false,
+    "createdAt": "2026-11-06T00:00:00.000Z"
+  },
+  {
+    "id": "works-in-progress",
+    "title": "works in progress print subscription",
+    "category": "books",
+    "note": "a print magazine about science, progress, and ideas.",
+    "price": "",
+    "url": "https://worksinprogress.co/print/",
+    "image": "/gifts/works-in-progress.webp",
+    "links": [
+      {
+        "label": "visit shop",
+        "url": "https://worksinprogress.co/print/"
+      }
+    ],
+    "favorite": false,
+    "claimed": false,
+    "createdAt": "2026-11-06T00:00:00.000Z"
+  },
+  {
+    "id": "working-in-public",
+    "title": "working in public",
+    "category": "books",
+    "note": "a book about making and maintaining open source software.",
+    "price": "",
+    "url": "https://www.amazon.com/dp/0578675862/",
+    "image": "/gifts/working-in-public.webp",
+    "links": [
+      {
+        "label": "visit shop",
+        "url": "https://www.amazon.com/dp/0578675862/"
+      }
+    ],
+    "favorite": false,
+    "claimed": false,
+    "createdAt": "2026-11-06T00:00:00.000Z"
+  },
+  {
+    "id": "lady-m",
+    "title": "lady m mille crêpes",
+    "category": "other",
+    "note": "a mille crêpes cake, or a gift card for a future celebration.",
+    "price": "",
+    "url": "https://www.ladym.com/items/md-signature-mille-crepes",
+    "image": "/gifts/lady-m.webp",
+    "links": [
+      {
+        "label": "visit shop",
+        "url": "https://www.ladym.com/items/md-signature-mille-crepes"
+      },
+      {
+        "label": "gift card",
+        "url": "https://www.ladym.com/items/gift-card"
+      }
+    ],
+    "favorite": false,
+    "claimed": false,
+    "createdAt": "2026-11-06T00:00:00.000Z"
+  },
+  {
+    "id": "sf-symphony",
+    "title": "sf symphony gift certificate",
+    "category": "experiences",
+    "note": "a gift certificate for a concert in san francisco.",
+    "price": "",
+    "url": "https://www.sfsymphony.org/Buy-Tickets/Gift-Certificates",
+    "image": "/gifts/sf-symphony.webp",
+    "links": [
+      {
+        "label": "visit shop",
+        "url": "https://www.sfsymphony.org/Buy-Tickets/Gift-Certificates"
+      }
+    ],
+    "favorite": false,
+    "claimed": false,
+    "createdAt": "2026-11-06T00:00:00.000Z"
+  },
+  {
+    "id": "shoji",
+    "title": "shoji gift card",
+    "category": "experiences",
+    "note": "a gift card for shoji in san francisco.",
+    "price": "",
+    "url": "https://www.shojisf.com/gift-card",
+    "image": "/gifts/shoji.webp",
+    "links": [
+      {
+        "label": "visit shop",
+        "url": "https://www.shojisf.com/gift-card"
+      }
+    ],
+    "favorite": false,
+    "claimed": false,
+    "createdAt": "2026-11-06T00:00:00.000Z"
+  },
+  {
+    "id": "bar-iris",
+    "title": "bar iris gift card",
+    "category": "experiences",
+    "note": "a gift card for bar iris in san francisco.",
+    "price": "",
+    "url": "https://order.toasttab.com/egiftcards/restaurant-nisei-2316-polk-st",
+    "image": "/gifts/bar-iris.webp",
+    "links": [
+      {
+        "label": "visit shop",
+        "url": "https://order.toasttab.com/egiftcards/restaurant-nisei-2316-polk-st"
+      }
+    ],
+    "favorite": false,
+    "claimed": false,
+    "createdAt": "2026-11-06T00:00:00.000Z"
+  }
+]
